@@ -24,6 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include "cl_local.h"
 #include "../cgame/cg_api.h"
+#pragma warning(disable: 5045)
 
 static cgExport_t		*cge;
 

@@ -25,6 +25,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "../client/cl_local.h"
 #include "win_local.h"
 
+#pragma warning(disable: 5045)
+
 /*
 =========================================================================
 
@@ -202,13 +204,62 @@ keyNum_t In_MapKey (int wParam, int lParam)
 In_GetKeyState
 =================
 */
-qBool In_GetKeyState (keyNum_t keyNum)
+qBool In_GetKeyState(keyNum_t keyNum)
 {
 	switch (keyNum) {
-	case K_CAPSLOCK:		return (GetKeyState (VK_CAPITAL)) ? qTrue : qFalse;
+	case K_CAPSLOCK:
+		return (GetKeyState(VK_CAPITAL)) ? qTrue : qFalse;
+	case K_BADKEY:
+		return qFalse; // No key state for this one.
+	case K_RSHIFT:
+		return (GetKeyState(VK_SHIFT) & 0x8000) ? qTrue : qFalse;
+	case K_LSHIFT:
+		return (GetKeyState(VK_LSHIFT) & 0x8000) ? qTrue : qFalse;
+	case K_CTRL:
+		return (GetKeyState(VK_RCONTROL) & 0x8000) ? qTrue : qFalse;
+	case K_ALT:
+		return (GetKeyState(VK_RMENU) & 0x8000) ? qTrue : qFalse;
+	case K_SHIFT:
+		return (GetKeyState(VK_SHIFT) & 0x8000) ? qTrue : qFalse;
+	case K_AUX1:
+		return (GetKeyState(VK_XBUTTON1) & 0x8000) ? qTrue : qFalse;
+	case K_AUX2:
+		return (GetKeyState(VK_XBUTTON2) & 0x8000) ? qTrue : qFalse;
+	case K_AUX3:
+		return (GetKeyState(VK_XBUTTON1) & 0x8000) ? qTrue : qFalse;
+	case K_AUX4:
+		return (GetKeyState(VK_XBUTTON2) & 0x8000) ? qTrue : qFalse;
+	case K_AUX5:
+		return (GetKeyState(VK_XBUTTON1) & 0x8000) ? qTrue : qFalse;
+	case K_AUX6:
+		return (GetKeyState(VK_XBUTTON2) & 0x8000) ? qTrue : qFalse;
+	case K_AUX7:
+		return (GetKeyState(VK_XBUTTON1) & 0x8000) ? qTrue : qFalse;
+	case K_AUX8:
+		return (GetKeyState(VK_XBUTTON2) & 0x8000) ? qTrue : qFalse;
+	case K_MOUSE1:
+		return (GetKeyState(VK_LBUTTON) & 0x8000) ? qTrue : qFalse;
+	case K_MOUSE2:
+		return (GetKeyState(VK_MBUTTON) & 0x8000) ? qTrue : qFalse;
+	case K_MOUSE3:
+		return (GetKeyState(VK_MBUTTON) & 0x8000) ? qTrue : qFalse;
+	case K_MOUSE4:
+		return (GetKeyState(VK_XBUTTON1) & 0x8000) ? qTrue : qFalse;
+	case K_MOUSE5:
+		return (GetKeyState(VK_XBUTTON2) & 0x8000) ? qTrue : qFalse;
+	case K_ESCAPE:
+		return (GetKeyState(VK_ESCAPE) & 0x8000) ? qTrue : qFalse;
+	case K_TAB:
+		return (GetKeyState(VK_TAB) & 0x8000) ? qTrue : qFalse;
+	case K_ENTER:
+		return (GetKeyState(VK_RETURN) & 0x8000) ? qTrue : qFalse;
+	case K_UPARROW:
+		return (GetKeyState(VK_UP) & 0x8000) ? qTrue : qFalse;
+	default:
+		break; // Le decimos al compilador que los otros casos son intencionales.
 	}
 
-	Com_Printf (PRNT_ERROR, "In_GetKeyState: Invalid key");
+	Com_Printf(PRNT_ERROR, "In_GetKeyState: Invalid key");
 	return qFalse;
 }
 
