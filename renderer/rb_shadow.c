@@ -269,7 +269,7 @@ static void RB_CastShadowVolume (refEntity_t *ent, vec3_t mins, vec3_t maxs, flo
 	if (projectDistance > 0)
 		return;		// Light is inside the bbox
 
-	projectDistance += intensity;
+	projectDistance += fmin(intensity, 768.0f);	// Se deja un limite para evitar que la sombra traspase
 	if (projectDistance <= 0.1)
 		return;		// Too far away
 
