@@ -18,3 +18,4 @@
 /win32/vs17/game/x64
 /win32/vs17/shared/x64
 /win32/vs17/shared/Win32
+*.exe
