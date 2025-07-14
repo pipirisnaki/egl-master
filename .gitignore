@@ -19,3 +19,4 @@
 /win32/vs17/shared/x64
 /win32/vs17/shared/Win32
 *.exe
+/win32/vs17/egl/eglx86.exe
