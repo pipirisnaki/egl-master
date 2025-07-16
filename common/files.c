@@ -511,6 +511,7 @@ size_t FS_Write (void *buffer, size_t size, fileHandle_t fileNum)
 	case FS_MODE_WRITE_TEXT:
 	case FS_MODE_APPEND_TEXT:
 		break;
+	case FS_MODE_READ_BINARY:
 	default:
 		Com_Error (ERR_FATAL, "FS_Write: %s: was no opened in append/write mode", handle->name);
 		break;

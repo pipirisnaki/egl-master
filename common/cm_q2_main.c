@@ -364,12 +364,12 @@ static void CM_Q2BSP_LoadSubmodels (dQ2BspLump_t *l)
 		out = &cm_mapCModels[i];
 
 		// Spread the mins / maxs by a pixel
-		out->mins[0] = LittleFloat (in->mins[0]) - 1;
-		out->mins[1] = LittleFloat (in->mins[1]) - 1;
-		out->mins[2] = LittleFloat (in->mins[2]) - 1;
-		out->maxs[0] = LittleFloat (in->maxs[0]) + 1;
-		out->maxs[1] = LittleFloat (in->maxs[1]) + 1;
-		out->maxs[2] = LittleFloat (in->maxs[2]) + 1;
+		out->mins[0] = LittleFloat(in->mins[0]) - 1;
+		out->mins[1] = LittleFloat(in->mins[1]) - 1;
+		out->mins[2] = LittleFloat(in->mins[2]) - 1;
+		out->maxs[0] = LittleFloat(in->maxs[0]) + 1;
+		out->maxs[1] = LittleFloat(in->maxs[1]) + 1;
+		out->maxs[2] = LittleFloat(in->maxs[2]) + 1;
 
 		// Head node
 		out->headNode = LittleLong (in->headNode);

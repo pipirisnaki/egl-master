@@ -179,26 +179,26 @@ static void GUI_SetAction (gui_t *gui, eva_set_t *setAction)
 	}
 	else if (setAction->destType == (EVA_SETDEST_FLOAT | EVA_SETDEST_DEF))
 	{
-		// Lógica para este caso (actualmente vacía)
+		// Logica para este caso (actualmente vacia)
 	}
 	else if (setAction->destType == (EVA_SETDEST_VEC | EVA_SETDEST_DEF))
 	{
-		// Lógica para este caso (actualmente vacía)
+		// Logica para este caso (actualmente vacia)
 	}
 	else
 	{
-		// Manejar casos individuales o un error si no deberían ocurrir.
-		// El código original tenía un assert(0) para cualquier caso no manejado.
+		// Manejar casos individuales o un error si no deberian ocurrir.
+		// El codigo original tenia un assert(0) para cualquier caso no manejado.
 		switch (setAction->destType)
 		{
 		case EVA_SETDEST_FLOAT:
 		case EVA_SETDEST_VEC:
 		case EVA_SETDEST_STORAGE:
 		case EVA_SETDEST_DEF:
-			// Estos casos estaban vacíos en el switch original
+			// Estos casos estaban vacios en el switch original
 			break;
 		default:
-			assert(0); // Para cualquier combinación inesperada
+			assert(0); // Para cualquier combinacion inesperada
 			break;
 		}
 	}
