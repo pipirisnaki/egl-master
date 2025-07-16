@@ -610,7 +610,13 @@ void *Sys_LoadLibrary (libType_t libType, void *parms)
 	}
 
 	// Find the API function
-	APIfunc = (APIFunc_t)GetProcAddress (*lib, sys_libList[libType].apiFuncName);
+	FARPROC procAddr = GetProcAddress(*lib, sys_libList[libType].apiFuncName);
+	union {
+	    FARPROC fp;
+	    APIFunc_t api;
+	} cast;
+	cast.fp = procAddr;
+	APIfunc = cast.api;
 	if (!APIfunc) {
 		Sys_UnloadLibrary (libType);
 		return NULL;

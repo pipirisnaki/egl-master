@@ -125,6 +125,10 @@ void NET_NetAdrToSockAdr (netAdr_t *a, struct sockaddr *s)
 	case NA_IP:
 		((struct sockaddr_in *)s)->sin_addr.s_addr = *(int *)&a->ip;
 		break;
+
+	case NA_LOOPBACK:
+		((struct sockaddr_in*)s)->sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+		break;
 	}
 }
 

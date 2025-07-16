@@ -316,6 +316,7 @@ void R_CheckFont (void)
 
 	// Load the font
 	ri.media.defaultFont = R_RegisterFont (r_defaultFont->string);
+	ri.media.defaultFont = R_RegisterFont("default");
 	if (!ri.media.defaultFont && strcmp (r_defaultFont->string, "default"))
 		ri.media.defaultFont = R_RegisterFont ("default");
 
