@@ -146,19 +146,18 @@ static void GUI_SetAction (gui_t *gui, eva_set_t *setAction)
 	queueWindow = NULL;
 	queueEvent = WEV_NONE;
 
-	switch (setAction->destType) {
-	case EVA_SETDEST_FLOAT|EVA_SETDEST_STORAGE:
-		switch (setAction->destRegister) {
-		case FR_VISIBLE:
-			if (FRVALUE (setAction->destWindowPtr, setAction->destRegister) != setAction->srcStorage[0]) {
+	if (setAction->destType == (EVA_SETDEST_FLOAT | EVA_SETDEST_STORAGE))
+	{
+		if (setAction->destRegister == FR_VISIBLE)
+		{
+			if (FRVALUE(setAction->destWindowPtr, setAction->destRegister) != setAction->srcStorage[0]) {
 				gui->shared->cursor.mouseMoved = qTrue;
 				queueWindow = setAction->destWindowPtr;
-				if (FRVALUE (setAction->destWindowPtr, setAction->destRegister))
+				if (FRVALUE(setAction->destWindowPtr, setAction->destRegister))
 					queueEvent = WEV_INIT;
 				else
 					queueEvent = WEV_SHUTDOWN;
 			}
-			break;
 		}
 
 		switch (setAction->srcType) {
@@ -167,37 +166,41 @@ static void GUI_SetAction (gui_t *gui, eva_set_t *setAction)
 			setAction->destWindowPtr->d.floatRegisters[setAction->destRegister].var = &setAction->destWindowPtr->d.floatRegisters[setAction->destRegister].storage;
 			break;
 		case EVA_SETSRC_DEF:
-			break;
 		case EVA_SETSRC_GUIVAR:
 			break;
 		}
-		break;
-
-	case EVA_SETDEST_VEC|EVA_SETDEST_STORAGE:
-		for (i=0 ; i<setAction->destNumVecs ; i++)
+	}
+	else if (setAction->destType == (EVA_SETDEST_VEC | EVA_SETDEST_STORAGE))
+	{
+		for (i = 0; i < setAction->destNumVecs; i++)
 			setAction->destWindowPtr->d.vecRegisters[setAction->destRegister].storage[i] = setAction->srcStorage[i];
 
 		setAction->destWindowPtr->d.vecRegisters[setAction->destRegister].var = setAction->destWindowPtr->d.vecRegisters[setAction->destRegister].storage;
-		break;
-
-	case EVA_SETDEST_FLOAT|EVA_SETDEST_DEF:
-		break;
-
-	case EVA_SETDEST_VEC|EVA_SETDEST_DEF:
-		break;
-
-	case EVA_SETDEST_FLOAT:
-		break;
-	case EVA_SETDEST_VEC:
-		break;
-	case EVA_SETDEST_STORAGE:
-		break;
-	case EVA_SETDEST_DEF:
-		break;
-
-	default:
-		assert (0);
-		break;
+	}
+	else if (setAction->destType == (EVA_SETDEST_FLOAT | EVA_SETDEST_DEF))
+	{
+		// Lógica para este caso (actualmente vacía)
+	}
+	else if (setAction->destType == (EVA_SETDEST_VEC | EVA_SETDEST_DEF))
+	{
+		// Lógica para este caso (actualmente vacía)
+	}
+	else
+	{
+		// Manejar casos individuales o un error si no deberían ocurrir.
+		// El código original tenía un assert(0) para cualquier caso no manejado.
+		switch (setAction->destType)
+		{
+		case EVA_SETDEST_FLOAT:
+		case EVA_SETDEST_VEC:
+		case EVA_SETDEST_STORAGE:
+		case EVA_SETDEST_DEF:
+			// Estos casos estaban vacíos en el switch original
+			break;
+		default:
+			assert(0); // Para cualquier combinación inesperada
+			break;
+		}
 	}
 
 	// Trigger events
