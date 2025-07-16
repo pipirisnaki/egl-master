@@ -34,7 +34,7 @@ woven in by Terry Thorsen 1/2003.
   version without encryption capabilities).
  */
 
-
+#pragma warning(disable: 5045)
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

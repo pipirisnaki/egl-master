@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // Quake2 BSP map model tracing
 //
 
+#pragma warning(disable: 5045)
 #include "cm_q2_local.h"
 
 static int				cm_q2_checkCount;

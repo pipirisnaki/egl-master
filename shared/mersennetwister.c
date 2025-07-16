@@ -43,6 +43,7 @@
 // It would be nice to CC: <Cokus@math.washington.edu> when you write.
 //
 
+#pragma warning(disable: 4711)
 #include <stdio.h>
 #include <stdlib.h>
 

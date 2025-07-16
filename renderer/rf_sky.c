@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // rf_sky.c
 // Sky clipping and rendering
 //
-
+#pragma warning(disable: 5045)
 #include "rf_local.h"
 
 typedef struct skyState_s {

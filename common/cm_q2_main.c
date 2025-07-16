@@ -24,6 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // - A lot of these allocations can be better sized (entity string for example).
 //
 
+#pragma warning(disable: 5045)
 #include "cm_q2_local.h"
 
 static byte				*cm_q2_mapBuffer;

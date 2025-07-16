@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // rf_material.c
 // Material loading, caching, and some primitive surface rendering
 //
-
+#pragma warning(disable: 5045)
 #include "rf_local.h"
 
 #define MAX_MATERIAL_HASH			(MAX_MATERIALS/4)

@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // snd_dma.c
 // Main control for any streaming sound output device
 //
-
+#pragma warning(disable: 5045)
 #include "snd_local.h"
 
 typedef struct sfxSamplePair_s {

@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 //
 // gui_init.c
 //
-
+#pragma warning(disable: 5045)
 #include "gui_local.h"
 
 static gui_t			cl_guiList[MAX_GUIS];

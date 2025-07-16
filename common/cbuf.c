@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 //
 // cbuf.c
 //
-
+#pragma warning(disable: 5045)
 #include "common.h"
 
 static netMsg_t	com_cbufText;

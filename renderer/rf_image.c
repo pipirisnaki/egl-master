@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // The image loading functions MUST remain local to this file, since memory allocations
 // and released are "batched" as to relieve possible fragmentation.
 //
-
+#pragma warning(disable: 5045)
 #include "rf_local.h"
 
 #ifdef _WIN32
@@ -713,7 +713,7 @@ static void R_LoadTGA (char *name, byte **pic, int *width, int *height, int *sam
 	int			i, columns, rows, rowInc, row, col;
 	byte		*buf_p, *buffer, *pixbuf, *targaRGBA;
 	int			fileLen, components, readPixelCount, pixelCount;
-	byte		palette[256][4], red, green, blue, alpha;
+	byte		palette[256][4], red = 0, green = 0, blue = 0, alpha = 0;
 	qBool		compressed;
 	tgaHeader_t	tga;
 
@@ -2043,7 +2043,7 @@ static inline image_t *R_RegisterCubeMap (char *name, texFlags_t flags)
 	int			samples;
 	byte		*pic[6];
 	int			width, height;
-	int			firstSize, firstSamples;
+	int			firstSize = 0, firstSamples = 0;
 	char		loadName[MAX_QPATH];
 	const char	*bareName;
 

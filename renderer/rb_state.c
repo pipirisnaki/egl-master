@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // FIXME TODO:
 // - Statebit pushing, which will require that all state changes are local to the backend
 //
-
+#pragma warning(disable: 5045)
 #include "rb_local.h"
 
 rb_glState_t	rb_glState;

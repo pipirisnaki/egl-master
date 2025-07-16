@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // FIXME TODO:
 // - A lot of these allocations can be better sized (entity string for example).
 //
-
+#pragma warning(disable: 5045)
 #include "cm_q3_local.h"
 
 static byte				*cm_q3_mapBuffer;

@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // cm_q3_trace.c
 // Quake3 BSP map model tracing
 //
-
+#pragma warning(disable: 5045)
 #include "cm_q3_local.h"
 
 static int			cm_q3_checkCount;

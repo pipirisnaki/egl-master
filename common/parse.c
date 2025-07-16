@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // FIXME TODO:
 // - currentCol is broken in certain cases
 //
-
+#pragma warning(disable: 5045)
 #include "common.h"
 
 /*

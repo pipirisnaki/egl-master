@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // FIXME TODO: other neat features like maximum size, hunk management?
 //
 
+#pragma warning(disable: 5045)
 #include "common.h"
 
 #define MEM_HEAD_SENTINEL_TOP	0xFEBDFAED

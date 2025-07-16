@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // m_mat4.c
 //
 
+#pragma warning(disable: 4711)
 #include "shared.h"
 
 mat4x4_t	mat4x4Identity = { 

@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 //
 // snd_main.c
 //
-
+#pragma warning(disable: 5045)
 #include "snd_local.h"
 
 qBool					snd_isActive = qTrue;

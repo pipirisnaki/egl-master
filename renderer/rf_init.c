@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 //
 // rf_init.c
 //
-
+#pragma warning(disable: 5045)
 #include "rf_local.h"
 
 cVar_t	*e_test_0;
@@ -389,7 +389,7 @@ static vidMode_t r_vidModes[] = {
 #define NUM_VIDMODES (sizeof (r_vidModes) / sizeof (r_vidModes[0]))
 qBool R_GetInfoForMode (int mode, int *width, int *height)
 {
-	if (mode < 0 || mode >= NUM_VIDMODES)
+	if (mode < 0 || (unsigned int)mode >= NUM_VIDMODES)
 		return qFalse;
 
 	*width  = r_vidModes[mode].width;

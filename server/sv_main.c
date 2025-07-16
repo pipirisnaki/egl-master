@@ -119,7 +119,7 @@ void SV_UserinfoChanged (svClient_t *cl)
 	// Name for C code
 	strncpy (cl->name, Info_ValueForKey (cl->userInfo, "name"), sizeof (cl->name)-1);
 	// Mask off high bit
-	for (i=0 ; i<sizeof (cl->name) ; i++)
+	for (i = 0; i < (int)sizeof(cl->name); i++)
 		cl->name[i] &= 127;
 
 	// Rate command

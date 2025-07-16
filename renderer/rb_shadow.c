@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 //
 // rb_shadow.c
 //
-
+#pragma warning(disable: 5045)
 #include "rb_local.h"
 
 /*

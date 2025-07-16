@@ -76,6 +76,7 @@ then a packet only needs to be delivered if there is something in the
 unacknowledged reliable
 */
 
+#pragma warning(disable: 5045)
 cVar_t	*showpackets;
 cVar_t	*showdrop;
 cVar_t	*qport;

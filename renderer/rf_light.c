@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // Lightmaps
 // Alias model lighting
 //
-
+#pragma warning(disable: 5045)
 #include "rf_local.h"
 
 /*

@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // net_msg.c
 //
 
+#pragma warning(disable: 5045)
 #include "common.h"
 
 /*
@@ -765,7 +766,7 @@ char *MSG_ReadString (netMsg_t *src)
 
 		string[l] = c;
 		l++;
-	} while (l < sizeof (string)-1);
+	} while ((size_t)l < sizeof(string) - 1);
 
 	string[l] = 0;
 
@@ -791,7 +792,7 @@ char *MSG_ReadStringLine (netMsg_t *src)
 
 		string[l] = c;
 		l++;
-	} while (l < sizeof (string)-1);
+	} while ((size_t)l < sizeof(string) - 1);
 
 	string[l] = 0;
 

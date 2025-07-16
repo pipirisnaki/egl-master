@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // Wraps functionality between the two formats, leaving the other systems
 // perfectly ignorant to the actual format loaded
 //
-
+#pragma warning(disable: 5045)
 #include "cm_common.h"
 
 enum {

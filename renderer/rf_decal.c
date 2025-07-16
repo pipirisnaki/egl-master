@@ -647,7 +647,7 @@ nextNodeOnStack:
 			continue;
 		}
 
-		if (dist >= -r_decalRadius && (stackdepth < sizeof (localStack) / sizeof (mBspNode_t *)))
+		if (dist >= -r_decalRadius && (stackdepth < (int)(sizeof(localStack) / sizeof(mBspNode_t*))))
 			localStack[stackdepth++] = node->children[0];
 		node = node->children[1];
 	}

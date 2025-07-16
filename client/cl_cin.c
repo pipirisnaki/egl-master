@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 // FIXME TODO:
 // - Needs to resample the texture data if the image/cinematic size exceeds the video card maximum
 //
-
+#pragma warning(disable: 5045)
 #include "cl_local.h"
 
 #define MAX_CIN_HBUFFER 0x20000
