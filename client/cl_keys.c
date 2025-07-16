@@ -751,16 +751,18 @@ pasteIntoMessage:
 	if (key_chatCursorPos < MAXCMDLINE-1) {
 		// Check insert mode
 		if (key_insertOn) {
-			// Can't do strcpy to move string to right
-			i = strlen (key_chatBuffer[key_chatEditLine]) - 1;
+			// Se arregla buckle infinito cuando se chatea
+			size_t len = strlen(key_chatBuffer[key_chatEditLine]);
+			if (len > 0) {
+				i = len - 1;
 
-			if (i == MAXCMDLINE-2) 
-				i--;
+				if (i == MAXCMDLINE - 2)
+					i--;
 
-			for ( ; i>=key_chatCursorPos ; i--)
-				key_chatBuffer[key_chatEditLine][i + 1] = key_chatBuffer[key_chatEditLine][i];
+				for (; i >= key_chatCursorPos; i--)
+					key_chatBuffer[key_chatEditLine][i + 1] = key_chatBuffer[key_chatEditLine][i];
+			}
 		}
-
 		// Only null terminate if at the end
 		i = key_chatBuffer[key_chatEditLine][key_chatCursorPos];
 		key_chatBuffer[key_chatEditLine][key_chatCursorPos] = key;
@@ -1318,8 +1320,8 @@ void Key_Event (keyNum_t keyNum, qBool isDown, uint32 time)
 		return;
 
 	case KD_MESSAGE:
-		if (isDown)
-			Key_Message(keyNum);
+	//	if (isDown)
+	//		Key_Message(keyNum);
 		break;
 
 	case KD_MENU:
