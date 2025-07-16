@@ -82,7 +82,7 @@ reInit:
 	if (!cl_acLibrary)
 		return qFalse;
 
-	init = (FNINIT)AC_GPA ("Initialize");
+	init = (FNINIT)(void*)AC_GPA("Initialize");
 	acex = (acExport_t *)init ();
 	if (!updated && !acex) {
 		updated = qTrue;
