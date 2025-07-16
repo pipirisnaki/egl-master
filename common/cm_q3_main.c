@@ -1104,7 +1104,7 @@ cBspModel_t *CM_Q3BSP_LoadMap (uint32 *buffer)
 	// Byte swap lumps
 	//
 	header = *(dQ3BspHeader_t *)buffer;
-	for (i=0 ; i<sizeof (dQ3BspHeader_t)/4 ; i++)
+	for (i = 0; i < (int)(sizeof(dQ3BspHeader_t) / 4); i++)
 		((int *)&header)[i] = LittleLong (((int *)&header)[i]);
 	cm_q3_mapBuffer = (byte *)buffer;
 

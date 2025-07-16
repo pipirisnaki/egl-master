@@ -344,7 +344,9 @@ static void GUI_VarList_f (void)
 		switch (var->type) {
 		case GVT_FLOAT:	Com_Printf (0, "float ");	break;
 		case GVT_STR:	Com_Printf (0, "str   ");	break;
+		case GVT_STR_PTR: Com_Printf(0, "str*  "); break;
 		case GVT_VEC:	Com_Printf (0, "vec   ");	break;
+		default:		Com_Printf(0, "unk   ");	break;
 		}
 
 		Com_Printf (0, "%s\n", var->name);

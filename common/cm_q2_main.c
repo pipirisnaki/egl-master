@@ -546,7 +546,7 @@ cBspModel_t *CM_Q2BSP_LoadMap (uint32 *buffer)
 	// Byte swap
 	//
 	header = *(dQ2BspHeader_t *)buffer;
-	for (i=0 ; i<sizeof (dQ2BspHeader_t)/4 ; i++)
+	for (i = 0; i < (int)(sizeof(dQ2BspHeader_t) / 4); i++)
 		((int *)&header)[i] = LittleLong (((int *)&header)[i]);
 	cm_q2_mapBuffer = (byte *)buffer;
 

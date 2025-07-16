@@ -611,7 +611,7 @@ void FS_Seek (fileHandle_t fileNum, long offset, fsSeekOrigin_t seekOrigin)
 		// Skip until the desired offset is reached
 		while (remaining) {
 			len = remaining;
-			if (len > sizeof (dummy))
+			if ((size_t)len > sizeof(dummy))
 				len = sizeof (dummy);
 
 			r = unzReadCurrentFile (handle->pkzFile, dummy, len);
