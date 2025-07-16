@@ -601,7 +601,8 @@ static void Key_Message (int key)
 		}
 pasteIntoMessage:
 		if ((cbd = Sys_GetClipboardData ()) != 0) {
-			strtok (cbd, "\n\r\b");
+			char* token = strtok(cbd, "\n\r\b");
+			(void)token;
 
 			i = strlen (cbd);
 			if (i + key_chatCursorPos >= MAXCMDLINE)
@@ -833,7 +834,8 @@ static void Key_Console (int key)
 		}
 pasteIntoMessage:
 		if ((cbd = Sys_GetClipboardData ()) != 0) {
-			strtok (cbd, "\n\r\b");
+			char* token = strtok(cbd, "\n\r\b");
+			(void)token;
 
 			i = strlen (cbd);
 			if (i + key_consoleCursorPos >= MAXCMDLINE)
@@ -1180,6 +1182,8 @@ void Key_Event (keyNum_t keyNum, qBool isDown, uint32 time)
 
 		if (key_keyInfo[keyNum].repeated > 1) {
 			// Ignore most autorepeats
+			#pragma warning( push )
+			#pragma warning( disable : 4061 )
 			switch (keyNum) {
 			case K_BACKSPACE:
 			case K_DEL:
@@ -1202,6 +1206,7 @@ void Key_Event (keyNum_t keyNum, qBool isDown, uint32 time)
 					return;
 				break;
 			}
+			#pragma warning( pop )
 		}
 
 		if (keyNum >= 200 && keyNum < K_MWHEELDOWN && !key_keyInfo[keyNum].bind)
@@ -1311,6 +1316,19 @@ void Key_Event (keyNum_t keyNum, qBool isDown, uint32 time)
 
 		Key_ExecuteBind (keyNum, isDown);
 		return;
+
+	case KD_MESSAGE:
+		if (isDown)
+			Key_Message(keyNum);
+		break;
+
+	case KD_MENU:
+		GUI_KeyDown(keyNum);
+		CL_CGModule_KeyEvent(keyNum, isDown);
+		break;
+
+	default:
+		Com_Error(ERR_FATAL, "Bad keyDest");
 	}
 
 	// Other systems only care about key down events

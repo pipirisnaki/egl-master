@@ -610,6 +610,13 @@ void CL_SendCmd (void)
 	case CA_CONNECTING:
 		// Wait until active
 		return;
+	case CA_UNINITIALIZED:
+		// Not ready to send commands
+		return;
+
+	case CA_ACTIVE:
+		// Normal command sending continues below
+		break;
 	}
 
 	cl.cmdNum = cls.netChan.outgoingSequence & CMD_MASK;

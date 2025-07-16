@@ -95,6 +95,11 @@ static void SV_New_f (void)
 		playerNum = -1;
 		break;
 
+	case SS_DEAD:
+	case SS_LOADING:
+	case SS_GAME:
+	case SS_DEMO:
+
 	default:
 		playerNum = sv_currentClient - svs.clients;
 		break;

@@ -251,6 +251,15 @@ void CL_SetState (caState_t state)
 	case CA_CONNECTED:
 		Cvar_FixCheatVars ();
 		break;
+
+	case CA_UNINITIALIZED:
+		break;
+
+	case CA_DISCONNECTED:
+		break;
+
+	case CA_ACTIVE:
+		break;
 	}
 }
 
@@ -386,6 +395,12 @@ static void CL_ClientConnect_CP (void)
 		Com_DevPrintf (PRNT_WARNING, "Dup connect received. Ignored.\n");
 		return;
 
+	case CA_CONNECTING:
+		// FIXME: only call if last state was < CA_CONNECTING?
+		CL_CGModule_ForceMenuOff();
+		Snd_StopAllSounds();
+		break;
+
 	case CA_DISCONNECTED:
 		Com_DevPrintf (0, "Received connect when disconnected. Ignored.\n");
 		return;
@@ -393,6 +408,12 @@ static void CL_ClientConnect_CP (void)
 	case CA_ACTIVE:
 		Com_DevPrintf (0, "Illegal connect when already connected! (q2msgs?). Ignored.\n");
 		return;
+
+	case CA_UNINITIALIZED:
+		break;
+
+	default:
+		break;
 	}
 
 	Com_DevPrintf (0, "client_connect: new\n");

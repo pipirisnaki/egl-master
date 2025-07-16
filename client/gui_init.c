@@ -352,6 +352,14 @@ static qBool GUI_ParseFloatRegister (char *fileName, gui_t *gui, parse_t *ps, ch
 			// "<window::>var"
 			Q_strncpyz (windowName, source, sizeof (windowName));
 			p = strstr (windowName, "::");
+
+			if (!p) {
+				// Este caso no deberia ocurrir si la logica es correcta, pero previene un crash.
+				GUI_PrintPos(PRNT_ERROR, ps, fileName, gui);
+				GUI_PrintError("ERROR: Falla de parseo interno en '%s'\n", keyName);
+				return qFalse;
+			}
+
 			*p = '\0';
 			// "window::<var>"
 			Q_strncpyz (floatName, p+2, sizeof (floatName));
@@ -454,6 +462,13 @@ static qBool GUI_ParseVectorRegister (char *fileName, gui_t *gui, parse_t *ps, c
 			// "<window::>var"
 			Q_strncpyz (windowName, source, sizeof (windowName));
 			p = strstr (windowName, "::");
+
+			if (!p) {
+				GUI_PrintPos(PRNT_ERROR, ps, fileName, gui);
+				GUI_PrintError("ERROR: Falla de parseo interno en '%s'\n", keyName);
+				return qFalse;
+			}
+
 			*p = '\0';
 			// "window::<var>"
 			Q_strncpyz (vecName, p+2, sizeof (vecName));
@@ -850,6 +865,13 @@ static qBool event_newAction (evAction_t *newAction, evaType_t type, char *fileN
 			GUI_PrintPos (PRNT_ERROR, ps, fileName, gui);
 			GUI_PrintError ("ERROR: invalid/missing arguments for '%s'!\n", keyName);
 			return qFalse;
+		case EVA_NONE:
+		case EVA_CLOSE:
+		case EVA_IF:
+		case EVA_NAMED_EVENT:
+		case EVA_STOP_TRANSITIONS:
+		case EVA_MAX:
+			break;
 		}
 	}
 
@@ -1060,6 +1082,9 @@ static qBool event_newAction (evAction_t *newAction, evaType_t type, char *fileN
 
 	case EVA_TRANSITION:
 		break;
+	case EVA_NONE:
+	case EVA_MAX:
+		break;
 	}
 
 	// Final ';'
@@ -1120,6 +1145,16 @@ static qBool itemDef_newEvent (evType_t type, char *fileName, gui_t *gui, parse_
 		}
 		newEvent->onTime = len;
 		break;
+	case WEV_NONE:
+	case WEV_ACTION:
+	case WEV_ESCAPE:
+	case WEV_FRAME:
+	case WEV_INIT:
+	case WEV_MOUSE_ENTER:
+	case WEV_MOUSE_EXIT:
+	case WEV_SHUTDOWN:
+	case WEV_MAX:
+		break;
 	}
 
 	// Make sure the event doesn't already exist
@@ -1144,7 +1179,15 @@ static qBool itemDef_newEvent (evType_t type, char *fileName, gui_t *gui, parse_
 				return qFalse;
 			}
 			break;
-
+		case WEV_NONE:
+		case WEV_ACTION:
+		case WEV_ESCAPE:
+		case WEV_FRAME:
+		case WEV_INIT:
+		case WEV_MOUSE_ENTER:
+		case WEV_MOUSE_EXIT:
+		case WEV_SHUTDOWN:
+		case WEV_MAX:
 		default:
 			GUI_PrintPos (PRNT_ERROR, ps, fileName, gui);
 			GUI_PrintError ("ERROR: event '%s' already exists for this window!\n", keyName);
@@ -2062,6 +2105,9 @@ qBool GUI_NewWindowDef (char *fileName, gui_t *gui, parse_t *ps, char *keyName)
 		Vec4Set (newGUI->s.vecRegisters[VR_TEXT_COLOR].storage, 1, 1, 1, 1);
 		newGUI->s.floatRegisters[FR_TEXT_SCALE].storage = 1;
 		break;
+
+	case WTP_MAX:
+		break;
 	}
 
 	// Storage space for children
@@ -2120,6 +2166,9 @@ qBool GUI_NewWindowDef (char *fileName, gui_t *gui, parse_t *ps, char *keyName)
 			if (!GUI_CallKeyFunc (fileName, newGUI, ps, cl_itemDefKeyList, cl_textDefKeyList, NULL, token))
 				return qFalse;
 			break;
+
+		case WTP_MAX:
+			break;
 		}
 	}
 
@@ -2143,6 +2192,18 @@ qBool GUI_NewWindowDef (char *fileName, gui_t *gui, parse_t *ps, char *keyName)
 			GUI_PrintError ("ERROR: missing required 'values' value!\n");
 			return qFalse;
 		}
+		break;
+
+	case WTP_GUI:
+	case WTP_GENERIC:
+	case WTP_BIND:
+	case WTP_CHOICE:
+	case WTP_EDIT:
+	case WTP_LIST:
+	case WTP_RENDER:
+	case WTP_SLIDER:
+	case WTP_TEXT:
+	case WTP_MAX:
 		break;
 	}
 
@@ -2308,6 +2369,7 @@ static void GUI_RegisterFloats (floatRegister_t *floats, int maxFloats)
 		case REG_SOURCE_GUIVAR:
 			floats[i].var = &floats[i].guiVar->floatVal;
 			break;
+		case REG_SOURCE_MAX:
 		default:
 			assert (0);
 			break;
@@ -2329,6 +2391,7 @@ static void GUI_RegisterVecs (vecRegister_t *vecs, int maxVecs)
 		case REG_SOURCE_GUIVAR:
 			vecs[i].var = &vecs[i].guiVar->vecVal[0];
 			break;
+		case REG_SOURCE_MAX:
 		default:
 			assert (0);
 			break;
@@ -2398,6 +2461,9 @@ static void GUI_r_TouchGUI (gui_t *gui)
 		gui->s.textDef->fontPtr = R_RegisterFont (gui->s.textDef->fontName);
 		if (!gui->s.textDef->fontPtr)
 			GUI_CantFindMedia (gui, "Font", gui->s.textDef->fontName);
+		break;
+
+	case WTP_MAX:
 		break;
 	}
 
@@ -2475,6 +2541,9 @@ static void GUI_r_TouchGUI (gui_t *gui)
 					else if (action->set->destType & EVA_SETDEST_VEC)
 						action->set->srcGUIVar = GUIVar_Register (action->set->srcName, GVT_VEC);
 					break;
+
+				case EVA_SETSRC_STORAGE:
+					break;
 				}
 				break;
 
@@ -2482,6 +2551,12 @@ static void GUI_r_TouchGUI (gui_t *gui)
 				break;
 
 			case EVA_TRANSITION:
+				break;
+
+			case EVA_NONE:
+				break;
+
+			case EVA_MAX:
 				break;
 			}
 		}

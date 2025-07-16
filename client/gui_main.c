@@ -66,6 +66,7 @@ void GUI_ResetGUIState (gui_t *gui)
 	case WTP_RENDER:	memcpy (gui->d.renderDef, gui->s.renderDef, sizeof (renderDef_t));	break;
 	case WTP_SLIDER:	memcpy (gui->d.sliderDef, gui->s.sliderDef, sizeof (sliderDef_t));	break;
 	case WTP_TEXT:		memcpy (gui->d.textDef, gui->s.textDef, sizeof (textDef_t));		break;
+	case WTP_MAX:																			break;
 	}
 
 	if (FRVALUE (gui, FR_VISIBLE)) {
@@ -473,6 +474,7 @@ static void GUI_DrawWindows (gui_t *gui)
 	case WTP_SLIDER:	GUI_DrawSliderDef (gui);	break;
 	case WTP_TEXT:		GUI_DrawTextDef (gui);		break;
 	default:			assert (0);					break;
+	case WTP_MAX:									break;
 	}
 
 	// Bounds debug

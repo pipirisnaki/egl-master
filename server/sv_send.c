@@ -576,6 +576,9 @@ void SV_SendClientMessages (void)
 		case SS_PIC:
 			Netchan_Transmit (&c->netChan, msgLen, msgBuf);
 			break;
+		case SS_DEAD:
+		case SS_LOADING:
+		case SS_GAME:
 
 		default:
 			if (c->state == SVCS_SPAWNED) {

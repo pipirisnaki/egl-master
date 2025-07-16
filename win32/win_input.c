@@ -255,8 +255,96 @@ qBool In_GetKeyState(keyNum_t keyNum)
 		return (GetKeyState(VK_RETURN) & 0x8000) ? qTrue : qFalse;
 	case K_UPARROW:
 		return (GetKeyState(VK_UP) & 0x8000) ? qTrue : qFalse;
-	default:
-		break; // Le decimos al compilador que los otros casos son intencionales.
+	case K_SPACE:
+		return (GetKeyState(VK_SPACE) & 0x8000) ? qTrue : qFalse;
+	case K_BACKSPACE:
+		return qFalse;
+	case K_DOWNARROW:
+		return qFalse;
+	case K_LEFTARROW:
+		return qFalse;
+	case K_RIGHTARROW:
+		return qFalse;
+	case K_F1:
+		return (GetKeyState(VK_F1) & 0x8000) ? qTrue : qFalse;
+	case K_F2:
+		return (GetKeyState(VK_F2) & 0x8000) ? qTrue : qFalse;
+	case K_F3:
+		return (GetKeyState(VK_F3) & 0x8000) ? qTrue : qFalse;
+	case K_F4:
+		return (GetKeyState(VK_F4) & 0x8000) ? qTrue : qFalse;
+	case K_F5:
+		return (GetKeyState(VK_F5) & 0x8000) ? qTrue : qFalse;
+	case K_F6:
+		return (GetKeyState(VK_F6) & 0x8000) ? qTrue : qFalse;
+	case K_F7:
+		return (GetKeyState(VK_F7) & 0x8000) ? qTrue : qFalse;
+	case K_F8:
+		return (GetKeyState(VK_F8) & 0x8000) ? qTrue : qFalse;
+	case K_F9:
+		return (GetKeyState(VK_F9) & 0x8000) ? qTrue : qFalse;
+	case K_F10:
+		return (GetKeyState(VK_F10) & 0x8000) ? qTrue : qFalse;
+	case K_F11:
+		return (GetKeyState(VK_F11) & 0x8000) ? qTrue : qFalse;
+	case K_F12:
+		return (GetKeyState(VK_F12) & 0x8000) ? qTrue : qFalse;
+	case K_INS:
+	case K_DEL:
+	case K_PGDN:
+	case K_PGUP:
+	case K_HOME:
+	case K_END:
+	case K_KP_HOME:
+	case K_KP_UPARROW:
+	case K_KP_PGUP:
+	case K_KP_LEFTARROW:
+	case K_KP_FIVE:
+	case K_KP_RIGHTARROW:
+	case K_KP_END:
+	case K_KP_DOWNARROW:
+	case K_KP_PGDN:
+	case K_KP_ENTER:
+	case K_KP_INS:
+	case K_KP_DEL:
+	case K_KP_SLASH:
+	case K_KP_MINUS:
+	case K_KP_PLUS:
+	case K_JOY1:
+	case K_JOY2:
+	case K_JOY3:
+	case K_JOY4:
+	case K_AUX9:
+	case K_AUX10:
+	case K_AUX11:
+	case K_AUX12:
+	case K_AUX13:
+	case K_AUX14:
+	case K_AUX15:
+	case K_AUX16:
+	case K_AUX17:
+	case K_AUX18:
+	case K_AUX19:
+	case K_AUX20:
+	case K_AUX21:
+	case K_AUX22:
+	case K_AUX23:
+	case K_AUX24:
+	case K_AUX25:
+	case K_AUX26:
+	case K_AUX27:
+	case K_AUX28:
+	case K_AUX29:
+	case K_AUX30:
+	case K_AUX31:
+	case K_AUX32:
+	case K_MWHEELDOWN:
+	case K_MWHEELUP:
+	case K_MWHEELLEFT:
+	case K_MWHEELRIGHT:
+	case K_PAUSE:
+	case K_MAXKEYS:
+		break; // Todos estos casos usarán la lógica de error de abajo
 	}
 
 	Com_Printf(PRNT_ERROR, "In_GetKeyState: Invalid key");

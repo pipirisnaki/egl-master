@@ -129,6 +129,9 @@ void NET_NetAdrToSockAdr (netAdr_t *a, struct sockaddr *s)
 	case NA_LOOPBACK:
 		((struct sockaddr_in*)s)->sin_addr.s_addr = htonl(INADDR_LOOPBACK);
 		break;
+
+	case NA_MAX:
+		break;
 	}
 }
 
@@ -150,8 +153,11 @@ char *NET_AdrToString (netAdr_t *a)
 	case NA_IP:
 		Q_snprintfz (str, sizeof (str), "%i.%i.%i.%i:%i", a->ip[0], a->ip[1], a->ip[2], a->ip[3], ntohs(a->port));
 		break;
-	}
 
+	case NA_BROADCAST:
+	case NA_MAX:
+		break;
+	}
 	return str;
 }
 
@@ -415,6 +421,9 @@ int NET_SendPacket (netSrc_t sock, size_t length, void *data, netAdr_t *to)
 		if (!netSocket)
 			return 0;
 		break;
+
+	case NA_MAX:
+		return 0;
 
 	default:
 		Com_Error (ERR_FATAL, "NET_SendPacket: bad address naType");

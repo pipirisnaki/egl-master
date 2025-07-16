@@ -186,6 +186,15 @@ static void GUI_SetAction (gui_t *gui, eva_set_t *setAction)
 	case EVA_SETDEST_VEC|EVA_SETDEST_DEF:
 		break;
 
+	case EVA_SETDEST_FLOAT:
+		break;
+	case EVA_SETDEST_VEC:
+		break;
+	case EVA_SETDEST_STORAGE:
+		break;
+	case EVA_SETDEST_DEF:
+		break;
+
 	default:
 		assert (0);
 		break;
@@ -244,6 +253,9 @@ static void GUI_RunEvent (gui_t *gui, event_t *event)
 			break;
 		case EVA_TRANSITION:
 			break;
+		case EVA_NONE:
+		case EVA_MAX:
+			break;
 		}
 	}
 }
@@ -274,6 +286,17 @@ static void GUI_CheckDefDefault (gui_t *gui, evType_t type)
 		else {
 			assert (0);
 		}
+		break;
+	case WEV_NONE:
+	case WEV_ESCAPE:
+	case WEV_FRAME:
+	case WEV_INIT:
+	case WEV_MOUSE_ENTER:
+	case WEV_MOUSE_EXIT:
+	case WEV_NAMED:
+	case WEV_SHUTDOWN:
+	case WEV_TIME:
+	case WEV_MAX:
 		break;
 	}
 }
@@ -346,6 +369,17 @@ void GUI_TriggerEvents (gui_t *gui)
 		switch (gui->type) {
 		case WTP_CHECKBOX:
 			GUI_CheckDefDefault (gui, gui->defaultQueueList[i]);
+			break;
+		case WTP_GUI:
+		case WTP_GENERIC:
+		case WTP_BIND:
+		case WTP_CHOICE:
+		case WTP_EDIT:
+		case WTP_LIST:
+		case WTP_RENDER:
+		case WTP_SLIDER:
+		case WTP_TEXT:
+		case WTP_MAX:
 			break;
 		}
 	}
@@ -429,6 +463,9 @@ void GUI_QueueTrigger (gui_t *gui, evType_t type)
 		// Should never happen!
 		assert (0);
 		return;
+	case WEV_NONE:
+	case WEV_MAX:
+		break;
 	}
 
 	// Add to default action list (if not found already)
@@ -468,6 +505,17 @@ void GUI_QueueTrigger (gui_t *gui, evType_t type)
 		for (i=0, child=gui->childList ; i<gui->numChildren ; child++, i++)
 			GUI_QueueTrigger (child, WEV_INIT);
 		GUI_QueueTrigger (gui, WEV_MOUSE_ENTER);
+		break;
+	case WEV_NONE:
+	case WEV_ACTION:
+	case WEV_ESCAPE:
+	case WEV_FRAME:
+	case WEV_MOUSE_ENTER:
+	case WEV_MOUSE_EXIT:
+	case WEV_NAMED:
+	case WEV_SHUTDOWN:
+	case WEV_TIME:
+	case WEV_MAX:
 		break;
 	}
 }

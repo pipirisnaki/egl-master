@@ -112,6 +112,10 @@ void SCR_UpdateScreen (void)
 	case CA_CONNECTED:
 		CL_CGModule_UpdateConnectInfo ();
 		break;
+	case CA_UNINITIALIZED:
+	case CA_ACTIVE:
+	case CA_DISCONNECTED:
+		break;
 	}
 
 	// Render frame(s)
